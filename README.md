@@ -1,6 +1,6 @@
 # Ansi-Cat - Plays back .ans files on Windows.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/746fflggti7sywxf?svg=true)](https://ci.appveyor.com/project/peteri/ansi-cat)
+[![Build status](https://ci.appveyor.com/api/projects/status/fxx2lv72946f6y6j?svg=true)](https://ci.appveyor.com/project/peteri/ansi-cat)
 [![codecov.io](http://codecov.io/github/peteri/Ansi-Cat/coverage.svg?branch=master)](http://codecov.io/github/peteri/Ansi-Cat?branch=master)
 
 ## Description
