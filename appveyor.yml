@@ -1,0 +1,39 @@
+version: 1.0.{build}
+configuration: Release
+platform: Any CPU
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+before_build:
+  - nuget restore
+build:
+  project: Ansi-Cat.sln
+  verbosity: minimal
+test_script: 
+    - .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\MSTest.exe" -targetargs:"/noresults /noisolation /testcontainer:"".\Ansi-Cat.Tests\bin\Release\Ansi-Cat.Tests.dll" -filter:"+[Ansi-Cat]*  -[Ansi-Cat]Ansi-Cat.Properties.*" -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\Ansi-Cat_coverage.xml -returntargetcode
+    - "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
+    - pip install codecov
+    - codecov -f "Ansi-Cat_coverage.xml"
+after_build:
+    - 7z a Ansi-Cat.zip %APPVEYOR_BUILD_FOLDER%\Ansi-Cat\bin\Release\Ansi-Cat.exe
+    - 7z a Ansi-Cat.zip %APPVEYOR_BUILD_FOLDER%\Ansi-Cat\bin\Release\Ansi-Cat.exe.config
+    - 7z a Ansi-Cat.zip %APPVEYOR_BUILD_FOLDER%\Ansi-Cat\bin\Release\Samples\fighters.ans
+    - 7z a Ansi-Cat.zip %APPVEYOR_BUILD_FOLDER%\LICENSE
+artifacts:
+  - path: Ansi-Cat.zip
+    name: Ansi-Cat
+#deploy:
+#  release: Ansi-Cat-v$(appveyor_build_version)
+#  description: 'Ansi-Cat'
+#  provider: GitHub
+#  auth_token:
+#    secure: CnIqfZ5huExNR4m9laYX2cIH+mNAZ29LXxGUd5HbZQLyfmH/DqtYULftf6bswWWz # your encrypted token from GitHub
+#  artifact: Ansi-Cat.zip           # upload the zip
+#  draft: false
+#  prerelease: false
+#  on:
+#    branch: master                 # release from master branch only
+#   appveyor_repo_tag: true        # deploy on tag push only
