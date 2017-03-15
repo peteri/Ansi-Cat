@@ -4,38 +4,39 @@
 
 namespace AnsiCat
 {
-    using System;
+   using System;
 
-    /// <summary>
-    /// The main program.
-    /// </summary>
-    public class Program
-    {
-        /// <summary>
-        /// Main function.
-        /// </summary>
-        /// <param name="args">Arguments from the command line.</param>
-        public static void Main(string[] args)
-        {
-            try
+   /// <summary>
+   /// The main program.
+   /// </summary>
+   public class Program
+   {
+      /// <summary>
+      /// Main function.
+      /// </summary>
+      /// <param name="args">Arguments from the command line.</param>
+      public static void Main(string[] args)
+      {
+         try
+         {
+            var parameters = ParameterParser.Parse(args, Console.Out);
+            if (parameters != null)
             {
-                var parameters = ParameterParser.Parse(args, Console.Out);
-                if (parameters != null)
-                {   var delayAction= parameters.CpuFriendly ? ActionDelay.TenMs : ActionDelay.Accurate;
-                    var writer = new AnsiScreenWriter(
-                        new RealConsole(),
-                        new ActionDelay(parameters.TimePerCharacter, delayAction));
-                        writer.Write(AnsiReader.Read(parameters.Name));
-                }
+               var delayAction = parameters.CpuFriendly ? ActionDelay.TenMs : ActionDelay.Accurate;
+               var writer = new AnsiScreenWriter(
+                   new RealConsole(),
+                   new ActionDelay(parameters.TimePerCharacter, delayAction));
+               writer.Write(AnsiReader.Read(parameters.Name));
             }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine("Error occurred {0}", ex);
-            }
-            finally
-            {
-                Console.CursorVisible = true;
-            }
-        }
-    }
+         }
+         catch (Exception ex)
+         {
+            Console.Error.WriteLine("Error occurred {0}", ex);
+         }
+         finally
+         {
+            Console.CursorVisible = true;
+         }
+      }
+   }
 }

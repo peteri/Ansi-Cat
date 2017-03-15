@@ -120,6 +120,5 @@ namespace AnsiCat.Tests
             Assert.AreEqual(5208, parameters.TimePerCharacter.Ticks);
             Assert.IsTrue(parameters.CpuFriendly);
         }
-
     }
 }

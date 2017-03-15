@@ -8,7 +8,6 @@ namespace AnsiCat.Tests.Drivers
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
     using AnsiCat;
     using Moq;
 
@@ -52,11 +51,6 @@ namespace AnsiCat.Tests.Drivers
             {
                 return this.writeOutput;
             }
-
-            private set
-            {
-                this.writeOutput = value;
-            }
         }
 
         /// <summary>
@@ -67,11 +61,6 @@ namespace AnsiCat.Tests.Drivers
             get
             {
                 return this.foregroundColors;
-            }
-
-            private set
-            {
-                this.foregroundColors = value;
             }
         }
 
