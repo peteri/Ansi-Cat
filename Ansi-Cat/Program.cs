@@ -20,10 +20,13 @@ namespace AnsiCat
             try
             {
                 var parameters = ParameterParser.Parse(args, Console.Out);
-                var writer = new AnsiScreenWriter(
-                    new RealConsole(),
-                    new ActionDelay(parameters.TimePerCharacter, parameters.CpuFriendly ? ActionDelay.TenMs : ActionDelay.Accurate));
-                writer.Write(AnsiReader.Read(parameters.Name));
+                if (parameters != null)
+                {   var delayAction= parameters.CpuFriendly ? ActionDelay.TenMs : ActionDelay.Accurate;
+                    var writer = new AnsiScreenWriter(
+                        new RealConsole(),
+                        new ActionDelay(parameters.TimePerCharacter, delayAction));
+                        writer.Write(AnsiReader.Read(parameters.Name));
+                }
             }
             catch (Exception ex)
             {

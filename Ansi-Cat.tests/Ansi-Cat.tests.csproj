@@ -59,7 +59,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -87,6 +89,7 @@
       <DependentUpon>AnsiToConsoleColorTranslation.feature</DependentUpon>
     </Compile>
     <Compile Include="Steps\AnsiCommandsTestSteps.cs" />
+    <Compile Include="ParameterParserTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AnsiMiscCommands.feature">
